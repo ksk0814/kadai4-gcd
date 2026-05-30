@@ -1,0 +1,23 @@
+name: GitHub Actions CI Test
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test-gcd:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. コードのチェックアウト
+      uses: actions/checkout@v4
+
+    - name: 2. 各スクリプトに実行権限を付与
+      run: |
+        chmod +x gcd.sh
+        chmod +x test_gcd.sh
+
+    - name: 3. テスト用シェルスクリプトを実行
+      run: ./test_gcd.sh
